@@ -15,6 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - Adjusted code for Himalaya CLI `v1.0.0-beta`.
+- Disabled CLI logs for them not to mess up with errors. [#21]
 
 ### Fixed
 
@@ -26,8 +27,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- Replaced system calls by async jobs [github#230].
-- Set email listing page size to windows height [github#46].
+- Replaced system calls by async jobs [cli#230].
+- Set email listing page size to windows height [cli#46].
 
 ### Fixed
 
@@ -56,12 +57,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - keybind `himalaya-msg-attachments` became `himalaya-email-download-attachments`
   - keybind `himalaya-msg-add-attachment` became `himalaya-email-add-attachment`
 
-[Unreleased]: https://git.sr.ht/~soywod/himalaya-vim/tree/develop
-[0.7.1]: https://git.sr.ht/~soywod/himalaya-vim/refs/v0.7.1
+[#21]: https://github.com/pimalaya/himalaya-vim/issues/21
 
-[#47]: https://todo.sr.ht/~soywod/pimalaya/47
-[#98]: https://todo.sr.ht/~soywod/pimalaya/98
-[#147]: https://todo.sr.ht/~soywod/pimalaya/147
-
-[github#230]: https://github.com/soywod/himalaya/issues/230
-[github#46]: https://github.com/soywod/himalaya/issues/46
+[cli#46]: https://github.com/pimalaya/himalaya/issues/46
+[cli#230]: https://github.com/pimalaya/himalaya/issues/230

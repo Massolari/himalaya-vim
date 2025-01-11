@@ -3,11 +3,13 @@ if exists('g:himalaya_loaded')
 endif
 
 let default_executable = 'himalaya'
-let g:himalaya_executable = get(g:, 'himalaya_executable', default_executable)
+let himalaya = get(g:, 'himalaya_executable', default_executable)
 
-if !executable(g:himalaya_executable)
+if !executable(himalaya)
   throw 'Himalaya CLI not found, see https://pimalaya.org/himalaya/cli/latest/installation/'
 endif
+
+let g:himalaya_executable = 'RUST_LOG=off ' . himalaya
 
 " Backup cpo
 let s:cpo_backup = &cpo
