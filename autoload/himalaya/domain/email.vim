@@ -275,6 +275,48 @@ function! himalaya#domain#email#delete() abort range
   \})
 endfunction
 
+function! himalaya#domain#email#flag_add() abort range
+  let ids = stridx(bufname('%'), 'Himalaya envelopes') == 0 ? s:get_email_id_under_cursors(a:firstline, a:lastline) : s:id
+  let flags = input(printf("Flag to add: "), "", "custom,himalaya#domain#email#flags#complete")
+  redraw | echo
+  
+  let flagsarr = split(flags)
+  if len(flagsarr) == 0
+    return
+  endif
+
+  let account = himalaya#domain#account#current()
+  let folder = himalaya#domain#folder#current()
+
+  call himalaya#request#plain({
+  \ 'cmd': 'flag add --account %s --folder %s %s %s',
+  \ 'args': [shellescape(account), shellescape(folder), flags, ids],
+  \ 'msg': 'Adding flags: ' . flags . ' to email',
+  \ 'on_data': {-> himalaya#domain#email#list_with(account, folder, himalaya#domain#folder#current_page(), s:query)},
+  \})
+endfunction
+
+function! himalaya#domain#email#flag_remove() abort range
+  let ids = stridx(bufname('%'), 'Himalaya envelopes') == 0 ? s:get_email_id_under_cursors(a:firstline, a:lastline) : s:id
+  let flags = input(printf("Flag to remove: "), "", "custom,himalaya#domain#email#flags#complete")
+  redraw | echo
+
+  let flagsarr = split(flags)
+  if len(flagsarr) == 0
+    return
+  endif
+
+  let account = himalaya#domain#account#current()
+  let folder = himalaya#domain#folder#current()
+
+  call himalaya#request#plain({
+  \ 'cmd': 'flag remove --account %s --folder %s %s %s',
+  \ 'args': [shellescape(account), shellescape(folder), flags, ids],
+  \ 'msg': 'Removing flags:' . flags . ' from email',
+  \ 'on_data': {-> himalaya#domain#email#list_with(account, folder, himalaya#domain#folder#current_page(), s:query)},
+  \})
+endfunction
+
 function! s:bufwidth() abort " https://newbedev.com/get-usable-window-width-in-vim-script
   let width = winwidth(0)
   let numberwidth = max([&numberwidth, strlen(line('$'))+1])
